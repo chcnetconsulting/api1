@@ -55,12 +55,18 @@ class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
     end
     assert_response :no_content
   end
-  
+
   test "should forbid destroy of user" do
     assert_difference('User.count', 0) do
       delete api_v1_user_url(@user), as: :json
     end
     assert_response :forbidden
+  end
+
+  test 'destroy user should destroy linked customer' do
+    assert_difference('Customer.count', -1) do
+      users(:one).destroy
+    end
   end
 
 end

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
         ## here we put the api endpoints
         resources :tokens, only: [:create]
         resources :users, only: %i[show create update destroy]
+        resources :customer, only: [:show]
     end
   end
 end
