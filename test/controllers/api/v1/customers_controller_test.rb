@@ -6,7 +6,7 @@ class Api::V1::CustomersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show customer" do
-    get api_v1_customers_url(@customer), as: :as_json
+    get api_v1_customers_url(@customer), params: {}, headers: { Authoriztion: JsonWebToken.encode(user_id: @customer.user_id)}, as: :json
     assert_response :success
 
     json_response = JSON.parse(self.response.body)
@@ -45,7 +45,7 @@ class Api::V1::CustomersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show customers" do
-    get api_v1_customers_url, as: :json
+    get api_v1_customers_url, headers: { Authoriztion: JsonWebToken.encode(user_id: @customer.user_id)}, as: :json
     assert_response :success
     end
 end
