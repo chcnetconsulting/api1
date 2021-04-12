@@ -1,6 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   before_action :set_user, only: %i[show update destroy]
-  before_action :check_owner, only: %i[update, destroy]
+  before_action :check_owner, only: %i[update destroy]
   
   # GET /users/1
   def show
@@ -43,7 +43,7 @@ class Api::V1::UsersController < ApplicationController
   end
   
   def check_owner
-      head :forbidden unless @user.id == current_user&.id
+    head :forbidden unless @user.id == current_user&.id
   end
   
 end
