@@ -1,5 +1,7 @@
 class Api::V1::CustomersController < ApplicationController
-  before_action :check_login #, only: %i[index show create]
+  before_action :check_login, only: %i[create]
+
+
   def show
     render json: Customer.find(params[:id])
   end
@@ -14,6 +16,7 @@ class Api::V1::CustomersController < ApplicationController
       render json: customer, status: :created
     end
   end
+
 
   private
 
